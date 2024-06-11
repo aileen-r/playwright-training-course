@@ -31,3 +31,28 @@ test("First test", async ({ page }) => {
   // It will NOT reuse the browser context. So no browser storage, cookies etc.
   await page.close();
 });
+
+test("Day 1 homework", async ({page}) => {
+  await page.goto("https://www.edgewordstraining.co.uk/demo-site/");
+
+  // To record from an existing test, run the test so far in headed mode and ensure the page doesn't close after the test completes
+  // Then place the cursor in tbe test file and clikck "Record at cursor" in the vscode Playwright section.
+
+  // The below was recorded with codegen
+  await page.locator('#menu-item-46').getByRole('link', { name: 'My account' }).click();
+  await page.getByLabel('Username or email address *').click();
+  await page.getByLabel('Username or email address *').fill('test@dayshape.com');
+  await page.locator('#password').click();
+  await page.locator('#password').fill('dayshapetest');
+  await page.locator('#password').press('Enter');
+  await page.locator('#menu-item-43').getByRole('link', { name: 'Shop' }).click();
+  await page.getByLabel('Add “Beanie” to your cart').click();
+  await page.getByLabel('Add “Hoodie with Zipper” to').click();
+  await page.getByLabel('Add “Tshirt” to your cart').click();
+  await page.locator('#site-header-cart').getByRole('link', { name: 'View cart ' }).click();
+  await page.getByRole('row', { name: 'Remove this item Product: Beanie Price: £18.00 Quantity: Beanie quantity 1 Subtotal: £' }).getByLabel('Remove this item').click();
+  await page.getByRole('row', { name: 'Remove this item Product: Hoodie with Zipper Price: £45.00 Quantity: Hoodie' }).getByLabel('Remove this item').click();
+  await page.getByLabel('Remove this item').click();
+  await page.locator('#menu-item-46').getByRole('link', { name: 'My account' }).click();
+  await page.getByRole('link', { name: 'Log out' }).click();
+});
